@@ -1,4 +1,1 @@
-test_1 =    "test con 1"          
-test_2 = "test 2"
-test_3 = "test 3"
-game_name = "Basic Project"
+start_game = "Bắt đầu"

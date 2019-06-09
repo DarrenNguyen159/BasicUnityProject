@@ -2,16 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LoginSceneLoader : MonoBehaviour
 {
-    [SerializeField] private Text titleText;
+    private bool loadGUICompleted;
+    [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private Button startGameBtn;
-    [SerializeField] private Text startGameText;
     void Start()
     {
+        loadGUICompleted = false;
+    }
+
+    private void Update() {
+        if (!loadGUICompleted) {
+            // đợi đến khi load xong localization
+            if (Localization.loadCompleted) {
+                InitGUI();
+                loadGUICompleted = true;
+                // load xong GUI
+            }
+        }
+    }
+
+    void InitGUI() {
         // Set Title
         titleText.text = GameConfig.Strings.GAME_NAME;
-        startGameText.text = GameConfig.Strings.DEV_NAME;
+        startGameBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Localization.Text("start_game");
     }
 }

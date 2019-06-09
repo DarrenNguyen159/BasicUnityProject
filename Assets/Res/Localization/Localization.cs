@@ -7,36 +7,50 @@ using System.IO;
  */
 public class Localization : MonoBehaviour
 {
-    private SystemLanguage currentLanguage; // Ngôn ngữ của game
-    private Dictionary<string, string> englishTexts;
-    private Dictionary<string, string> vietnameseTexts;
+    public static bool loadCompleted;
+    private static SystemLanguage currentLanguage; // Ngôn ngữ của game
+    private static Dictionary<string, string> englishTexts;
+    private static Dictionary<string, string> vietnameseTexts;
 
-    private void Start() {
+
+
+    private void Start()
+    {
+        loadCompleted = false;
         // Đặt ngôn ngữ là ngôn ngữ mặc định của thiết bị
-        this.setLanguage(this.getDeviceLanguage());
+        Localization.setLanguage(Localization.getDeviceLanguage());
 
         // Load text của các ngôn ngữ
-        this.LoadLocalization();
+        Localization.LoadLocalization();
+
     }
 
     // Hàm lấy text theo ngôn ngữ hiện tại
-    public string Text(string key)
+    public static string Text(string key)
     {
         // Truy cập file
         string value = key;
-        switch (this.currentLanguage) {
-            case SystemLanguage.English:
-                this.englishTexts.TryGetValue(key, out value);
-                return value;
-            case SystemLanguage.Vietnamese:
-                return "Vie";
-            default:
-                return "Eng";
+        try
+        {
+            switch (Localization.currentLanguage)
+            {
+                case SystemLanguage.English:
+                    return englishTexts[key];
+                case SystemLanguage.Vietnamese:
+                    return vietnameseTexts[key];
+                default:
+                    return englishTexts[key];
+            }
+        }
+        catch (KeyNotFoundException ex)  // không có key
+        {
+            // Debug.Log(ex);
+            return key;
         }
     }
 
     // Hàm lấy ngôn ngữ của thiết bị
-    public SystemLanguage getDeviceLanguage()
+    public static SystemLanguage getDeviceLanguage()
     {
         SystemLanguage lang = Application.systemLanguage;
         Debug.Log("Device Current Language is " + lang);
@@ -44,27 +58,32 @@ public class Localization : MonoBehaviour
     }
 
     // Hàm set ngôn ngữ của game
-    public void setLanguage(SystemLanguage lang)
+    public static void setLanguage(SystemLanguage lang)
     {
-        this.currentLanguage = lang;
+        Localization.currentLanguage = lang;
     }
 
-    public void LoadLocalization () {
+    public static void LoadLocalization()
+    {
         Debug.Log("Loading localization ...");
 
         // Load tiếng anh
         englishTexts = new Dictionary<string, string>();
-        this.LoadTextsOfLanguage(englishTexts, GameConfig.Paths.EN_PATH);
+        Localization.LoadTextsOfLanguage(englishTexts, GameConfig.Paths.EN_PATH);
 
         // Load tiếng việt
         vietnameseTexts = new Dictionary<string, string>();
-        this.LoadTextsOfLanguage(vietnameseTexts, GameConfig.Paths.VI_PATH);
+        Localization.LoadTextsOfLanguage(vietnameseTexts, GameConfig.Paths.VI_PATH);
+
+        loadCompleted = true;
     }
 
-    private void LoadTextsOfLanguage(Dictionary<string, string> texts, string filepath) {
+    private static void LoadTextsOfLanguage(Dictionary<string, string> texts, string filepath)
+    {
         StreamReader reader = new StreamReader(filepath);
         string line;
-        while ((line = reader.ReadLine()) != null) {// đọc từng dòng
+        while ((line = reader.ReadLine()) != null)
+        {// đọc từng dòng
             // Debug.Log(line);
             string[] pair = line.Split('=');
             string key = pair[0].Trim();
@@ -72,7 +91,8 @@ public class Localization : MonoBehaviour
             int valueLength = value.Length;
             int start = value.IndexOf('"');
             // Bỏ dấu " ở trước
-            if (start == -1) {// lỗi format
+            if (start == -1)
+            {// lỗi format
                 continue;
             }
 
@@ -80,19 +100,22 @@ public class Localization : MonoBehaviour
 
             int end = value.IndexOf('"');
             // Bỏ dấu " ở sau
-            if (end == -1) {// lỗi format
+            if (end == -1)
+            {// lỗi format
                 continue;
             }
 
             value = value.Remove(value.Length - 1);
-            
+
             // xử lý \n
             int i = value.IndexOf("\\n");
-            if (i != -1) {// có \n
+            if (i != -1)
+            {// có \n
                 value = value.Replace("\\n", "\n");
             }
-            
+
             texts.Add(key, value);
+            // Debug.Log(value);
         }
     }
 }
