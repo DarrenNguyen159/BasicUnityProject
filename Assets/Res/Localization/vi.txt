@@ -1,0 +1,3 @@
+﻿test_1 = "kiểm tra 1"
+test_2 = kiểm tra 2"
+test_3 = kiểm tra 3"
