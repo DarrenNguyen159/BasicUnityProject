@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameSizeManager : MonoBehaviour
 {
     public static Resolution currentResolution;
-    void Start()
+    void Awake()
     {
         // lấy kích thước màn hình
         GameSizeManager.currentResolution = Screen.currentResolution;

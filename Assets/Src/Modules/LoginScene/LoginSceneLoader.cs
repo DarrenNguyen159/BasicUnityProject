@@ -38,7 +38,8 @@ public class LoginSceneLoader : MonoBehaviour
     {
         Debug.Log("Call");
         // hiện
-        if (fading) {
+        if (fading)
+        {
             // mỗi frame
             for (float i = 1; i >= 0; i -= Time.deltaTime)
             {
@@ -48,7 +49,7 @@ public class LoginSceneLoader : MonoBehaviour
             }
         }
         // ẩn
-        else 
+        else
         {
             for (float i = 0; i <= 1; i += Time.deltaTime)
             {
