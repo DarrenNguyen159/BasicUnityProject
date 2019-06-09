@@ -7,16 +7,14 @@ using System.IO;
  */
 public class Localization : MonoBehaviour
 {
-    public static bool loadCompleted;
     private static SystemLanguage currentLanguage; // Ngôn ngữ của game
     private static Dictionary<string, string> englishTexts;
     private static Dictionary<string, string> vietnameseTexts;
 
 
 
-    private void Start()
+    private void Awake()
     {
-        loadCompleted = false;
         // Đặt ngôn ngữ là ngôn ngữ mặc định của thiết bị
         Localization.setLanguage(Localization.getDeviceLanguage());
 
@@ -74,8 +72,6 @@ public class Localization : MonoBehaviour
         // Load tiếng việt
         vietnameseTexts = new Dictionary<string, string>();
         Localization.LoadTextsOfLanguage(vietnameseTexts, GameConfig.Paths.VI_PATH);
-
-        loadCompleted = true;
     }
 
     private static void LoadTextsOfLanguage(Dictionary<string, string> texts, string filepath)
