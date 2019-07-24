@@ -17,8 +17,8 @@ public class GameBackground : MonoBehaviour
    private void AutoReScale() {
       int width = GameSizeManager.currentResolution.width;
       int height = GameSizeManager.currentResolution.height;
-      float factor = width / (sprite.bounds.size.x * GameConfig.SCREEN_SIZE_FACTOR);
-      float factor2 = height / (sprite.bounds.size.y * GameConfig.SCREEN_SIZE_FACTOR);
+      float factor = (sprite.bounds.size.x * GameConfig.SCREEN_SIZE_FACTOR) / width;
+      float factor2 = (sprite.bounds.size.y * GameConfig.SCREEN_SIZE_FACTOR) / height;
       if (factor2 > factor)
          factor = factor2;
       this.ScaleBy(factor);

@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{C64122E7-B305-26C4-CEAA-E44102F4901C}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Src/Base/GameBackground.cs">
+    <Files>
+      <File FileName="Assets/Src/Base/GameBackground.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="BasicUnityProject" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Src" expanded="True">
+                <Node name="Base" expanded="True">
+                  <Node name="GameBackground.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9378e054-9b14-4a7b-8973-583cd7bdb3e8" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
